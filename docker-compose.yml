@@ -1,34 +1,33 @@
-#version: '3.1'
+version: '3.1'
 
-
-#사설망 network생성
-networs:
+# 사설망 network 생성
+networks:
   kosa_network:
-	driver: bridge
-	
-#서비스 선언
+    driver: bridge
+
+# 서비스 선언
 services:
-  #was1 생성
+  # was1 생성
   was1:
-    image: kimseokryul/hello-web:latest
-	networks:
-	  - kosa_network
-
-  #was2생성
-  was2:
-    image: kimseokryul/hello-web:latest
-  	networks:
-  	  - kosa_network
-
-  #nginx생성
-  nginx:
-	image: nginx:latest
-	ports:
-	  - 80:80
-	volumes:
-	  - ~/nginx.conf:/etc/nginx/nginx.conf
-	networks:
+    image: masungil/hello-web:latest
+    networks:
       - kosa_network
-	depends_on:
+
+  # was2 생성
+  was2:
+    image: masungil/hello-web:latest
+    networks:
+      - kosa_network
+
+  # nginx 생성
+  nginx:
+    image: nginx:latest
+    ports:
+      - "80:80"
+    volumes:
+      - ~/nginx.conf:/etc/nginx/nginx.conf
+    networks:
+      - kosa_network
+    depends_on:
       - was1
-	  - was2
+      - was2
