@@ -1,5 +1,8 @@
 package com.kosa.hello;
 
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.mockito.ArgumentMatchers.intThat;
+
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;
 
@@ -9,5 +12,16 @@ class HelloWebApplicationTests {
 	@Test
 	void contextLoads() {
 	}
-
+	
+	private int add(int a, int b) {
+		return a + b * 10;
+	}
+	@Test
+	void testAdd() {
+		int a=10;
+		int b=10;
+		int sum = add(a, b);
+		
+		assertEquals(30, sum);
+	}
 }
